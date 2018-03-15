@@ -59,3 +59,26 @@ export function uniqueSort (arr) {
   })
   return res
 }
+
+/**
+ * [判断是否是Window对象]
+ * @param  {anything}  obj 
+ * @return {Boolean}
+ */
+function isWindow (obj) {
+  return null != obj && obj === obj.window
+}
+
+/**
+ * [判断是否是符合条件的类数组对象]
+ * @param  {anything}  obj 
+ * @return {Boolean}
+ */
+function isArrayLike (obj) {
+  var length = !!obj && 'length' in obj && obj.length
+  var typeRes = type(obj)
+  if (typeRes === 'function' || isWindow(obj)) {
+    return false
+  }
+  return typeRes === 'array' || length === 0 || typeof length === 'number' && length > 0 && (length - 1) in obj
+}
