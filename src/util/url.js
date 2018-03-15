@@ -36,3 +36,22 @@ function stringfyQueryString(obj) {
 
   return pairs.join('&');
 }
+/**
+ * [获取搜索条件内容]
+ * @param  {String} url
+ * @return {Object}
+ */
+function urlSearchParse (url) {
+  const searchIndex = url.trim().indexOf('?')
+  console.log(searchIndex, url.length -1)
+  if (searchIndex > -1 && searchIndex !== url.length - 1 && url.slice(searchIndex + 1).indexOf('=') > -1) {
+    let search = {}
+    url.slice(searchIndex + 1).split('&').map(function (item, index) {
+      const obj = item.split('=')
+      search[obj[0]] = obj[1]
+    })
+    return search
+  } else {
+    return null
+  }
+}
